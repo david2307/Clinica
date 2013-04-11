@@ -8,15 +8,16 @@ import javax.persistence.*;
 
 import java.util.*;
 
-@Entity
-public class TipoUsuario extends Model {
+public class Sintoma extends Model{
 	
-	@Required 
+	@Required
 	public String descripcion;
 	
-	public TipoUsuario(String descripcion){
+	@OneToMany
+	public TipoSintoma tipoSintoma;
+	
+	public Sintoma(String descripcion, TipoSintoma tipoSintoma){
 		this.descripcion = descripcion;
+		this.tipoSintoma = tipoSintoma;
 	}
-	
-	
 }

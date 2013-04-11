@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 import java.util.*;
 
-public class Usuario {
+public class Usuario extends Model {
 
 	@Required
 	public String nickName;

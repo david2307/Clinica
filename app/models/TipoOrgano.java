@@ -8,15 +8,12 @@ import javax.persistence.*;
 
 import java.util.*;
 
-@Entity
-public class TipoUsuario extends Model {
-	
-	@Required 
+public class TipoOrgano extends Model {
+
+	@Required
 	public String descripcion;
 	
-	public TipoUsuario(String descripcion){
+	public TipoOrgano(String descripcion){
 		this.descripcion = descripcion;
 	}
-	
-	
 }

@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 import java.util.*;
 
-public class Departamento {
+public class Departamento extends  Model {
 	
 	@Required
 	public String nombre;

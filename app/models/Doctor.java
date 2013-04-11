@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 import java.util.*;
 
-public class Doctor {
+public class Doctor extends Model {
 	
 	@Required
 	public String nombre;

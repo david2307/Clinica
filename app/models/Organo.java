@@ -8,16 +8,19 @@ import javax.persistence.*;
 
 import java.util.*;
 
-public class Municipio extends Model {
-
+public class Organo {
+	
 	@Required
 	public String nombre;
 	
-	@OneToMany
-	public Departamento departamento;
+	public int tipo;
 	
-	public Municipio(String nombre, Departamento departamento){
+	@OneToMany
+	public TipoOrgano tipoOrgano;
+	
+	 public Organo(String nombre, int tipo, TipoOrgano tipoOrgano){
 		this.nombre = nombre;
-		this.departamento = departamento;
+		this.tipo = tipo;
+		this.tipoOrgano = tipoOrgano;
 	}
 }

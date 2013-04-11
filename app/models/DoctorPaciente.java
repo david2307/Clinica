@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 import java.util.*;
 
-public class DoctorPaciente {
+public class DoctorPaciente extends Model {
 	
 	@OneToMany
 	public Doctor doctor;
