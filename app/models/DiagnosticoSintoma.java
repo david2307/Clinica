@@ -10,10 +10,10 @@ import java.util.*;
 
 public class DiagnosticoSintoma extends Model {
 	
-	@OneToMany
+	@ManyToOne
 	public DiagnosticoGeneral diagnosticoGeneral;
 	
-	@OneToMany
+	@ManyToOne
 	public Sintoma sintoma;
 	
 	public DiagnosticoSintoma(DiagnosticoGeneral diagnosticoGeneral, Sintoma sintoma){

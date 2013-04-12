@@ -10,10 +10,10 @@ import java.util.*;
 
 public class CitaProcedimiento extends Model{
 
-	@OneToMany
+	@ManyToOne
 	public Procedimiento procedimiento;
 	
-	@OneToMany
+	@ManyToOne
 	public Cita cita;
 	
 	public CitaProcedimiento(Procedimiento procedimiento, Cita cita){

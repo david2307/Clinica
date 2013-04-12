@@ -13,10 +13,10 @@ public class HistorialMedico extends Model{
 	@Required 
 	public boolean respuesta;
 	
-	@OneToMany
+	@ManyToOne
 	public Paciente paciente;
 	
-	@OneToMany
+	@ManyToOne
 	public Pregunta pregunta;
 	
 	public HistorialMedico(boolean respuesta, Paciente paciente, Pregunta pregunta){

@@ -19,13 +19,13 @@ public class DetalleReceta extends Model{
 	@Required
 	public String tiempo;
 	
-	@OneToMany
+	@ManyToOne
 	public Receta receta;
 	
-	@OneToMany
+	@ManyToOne
 	public Tratamiento tratamiento;
 	
-	@OneToMany
+	@ManyToOne
 	public PlanTratamiento planTratamiento;
 	
 	public DetalleReceta(String descripcion, String cantidad, String tiempo, Receta receta, Tratamiento tratamiento, PlanTratamiento planTratamiento){

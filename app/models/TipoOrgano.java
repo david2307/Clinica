@@ -13,7 +13,12 @@ public class TipoOrgano extends Model {
 	@Required
 	public String descripcion;
 	
-	public TipoOrgano(String descripcion){
+	@Required
+	public int tipo;
+	
+	public TipoOrgano(String descripcion, int tipo){
 		this.descripcion = descripcion;
+		this.tipo = tipo;
+		
 	}
 }

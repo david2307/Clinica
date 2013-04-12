@@ -16,7 +16,7 @@ public class DiagnosticoGeneral extends Model {
 	@Required
 	public int tipo;
 	
-	@OneToMany
+	@ManyToOne
 	public Cita cita;
 	
 	public DiagnosticoGeneral(String descripcion, int tipo, Cita cita){

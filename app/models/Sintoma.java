@@ -13,7 +13,7 @@ public class Sintoma extends Model{
 	@Required
 	public String descripcion;
 	
-	@OneToMany
+	@ManyToOne
 	public TipoSintoma tipoSintoma;
 	
 	public Sintoma(String descripcion, TipoSintoma tipoSintoma){

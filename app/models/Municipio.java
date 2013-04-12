@@ -13,7 +13,7 @@ public class Municipio extends Model {
 	@Required
 	public String nombre;
 	
-	@OneToMany
+	@ManyToOne
 	public Departamento departamento;
 	
 	public Municipio(String nombre, Departamento departamento){

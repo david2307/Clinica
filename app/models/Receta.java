@@ -16,7 +16,7 @@ public class Receta extends Model{
 	@Required
 	public Date fecha;
 	
-	@OneToMany
+	@ManyToOne
 	public Cita cita;
 	
 	public Receta(String descripcion, Date fecha, Cita cita){

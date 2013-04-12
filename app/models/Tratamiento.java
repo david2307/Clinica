@@ -19,10 +19,10 @@ public class Tratamiento extends Model {
 	@Required
 	public boolean estado;
 	
-	@OneToMany
+	@ManyToOne
 	public DiagnosticoGeneral diagnosticoGeneral;
 	
-	@OneToMany
+	@ManyToOne
 	public Procedimiento procedimiento;
 	
 	public Tratamiento(String descripcion, double valor, boolean estado, DiagnosticoGeneral diagnosticoGeneral, Procedimiento procedimiento){

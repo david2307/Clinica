@@ -38,10 +38,10 @@ public class Paciente extends Model {
 	
 	public String observaciones;
 	
-	@OneToMany
+	@ManyToOne
 	public Usuario usuario;
 	
-	@OneToMany
+	@ManyToOne
 	public Municipio municipio;
 	
 	

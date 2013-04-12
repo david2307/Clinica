@@ -13,14 +13,11 @@ public class Organo {
 	@Required
 	public String nombre;
 	
-	public int tipo;
-	
-	@OneToMany
+	@ManyToOne
 	public TipoOrgano tipoOrgano;
 	
-	 public Organo(String nombre, int tipo, TipoOrgano tipoOrgano){
+	 public Organo(String nombre, TipoOrgano tipoOrgano){
 		this.nombre = nombre;
-		this.tipo = tipo;
 		this.tipoOrgano = tipoOrgano;
 	}
 }

@@ -10,10 +10,10 @@ import java.util.*;
 
 public class DoctorPaciente extends Model {
 	
-	@OneToMany
+	@ManyToOne
 	public Doctor doctor;
 	
-	@OneToMany
+	@ManyToOne
 	public Paciente paciente;
 	
 	public DoctorPaciente(Doctor doctor, Paciente paciente){

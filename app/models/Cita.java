@@ -25,10 +25,10 @@ public class Cita extends Model {
 	@Required
 	public int estado;
 	
-	@OneToMany
+	@ManyToOne
 	public Paciente paciente;
 	
-	@OneToMany
+	@ManyToOne
 	public Doctor doctor;
 	
 	public Cita(Date fechaPeticion, String descripcion, Date fechaProgramada, Date fechaRealizacion, int estado, Paciente paciente, Doctor doctor){

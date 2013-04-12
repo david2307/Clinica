@@ -18,10 +18,10 @@ public class PlanTratamiento extends Model{
 	@Required
 	public int estado;
 	
-	@OneToMany
+	@ManyToOne
 	public Procedimiento procedimiento;
 	
-	@OneToMany
+	@ManyToOne
 	public DiagnosticoOrgano diagnosticoOrgano;
 	
 	public PlanTratamiento(double extra, String observaciones, int estado, Procedimiento procedimiento, DiagnosticoOrgano diagnosticoOrgano){

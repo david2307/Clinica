@@ -16,10 +16,10 @@ public class DiagnosticoOrgano {
 	@Required
 	public int estado;
 	
-	@OneToMany
+	@ManyToOne
 	public DiagnosticoGeneral diagnosticoGeneral;
 	
-	@OneToMany
+	@ManyToOne
 	public Organo organo;
 	
 	public DiagnosticoOrgano(String descripcion, int estado, DiagnosticoGeneral diagnosticoGeneral, Organo organo){

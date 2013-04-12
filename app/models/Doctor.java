@@ -26,10 +26,10 @@ public class Doctor extends Model {
 	@Required
 	public String dpi;
 	
-	@OneToMany
+	@ManyToOne
 	public Usuario usuario;
 	
-	@OneToMany
+	@ManyToOne
 	public Municipio municipio;
 	
 	

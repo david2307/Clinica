@@ -12,10 +12,10 @@ public class ClasificacionTratamiento extends Model{
 	
 	public String observaciones;
 	
-	@OneToMany
+	@ManyToOne
 	public EstadoTratamiento estadoTratamiento;
 	
-	@OneToMany
+	@ManyToOne
 	public Tratamiento tratamiento;
 	
 	public ClasificacionTratamiento(String observaciones, EstadoTratamiento estadoTratamiento, Tratamiento tratamiento){
