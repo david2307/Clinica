@@ -21,7 +21,7 @@ public class Paciente extends Model {
 	public String sexo;
 	
 	@Required
-	public String telefono;
+	public int telefono;
 	
 	@Required
 	public String dpi;
@@ -30,9 +30,9 @@ public class Paciente extends Model {
 	public String nombreEmergencia;
 	
 	@Required 
-	public String telefonoEmergencia;
+	public int telefonoEmergencia;
 	
-	public String ultimaVisita;
+	public Date ultimaVisita;
 	
 	public String referido;
 	
@@ -45,7 +45,7 @@ public class Paciente extends Model {
 	public Municipio municipio;
 	
 	
-	public Paciente(String nombre, String apellido, Date fechaNac, String sexo, String telefono, String dpi, String nombreEmergencia, String telefonoEmergencia, String ultimaVisita, String referido, String observaciones, Usuario usuario, Municipio municipio ){
+	public Paciente(String nombre, String apellido, Date fechaNac, String sexo, int telefono, String dpi, String nombreEmergencia, int telefonoEmergencia, Date ultimaVisita, String referido, String observaciones, Usuario usuario, Municipio municipio ){
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.fechaNac = fechaNac;
