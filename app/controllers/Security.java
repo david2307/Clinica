@@ -15,4 +15,16 @@ public class Security extends Secure.Security{
 		}
 		return false;
 	}
+	
+	static void onAuthenticated(){
+		String usuario = connected();
+    	Usuario us = Usuario.find("byNickName", usuario).first();
+    	if (us.tipoUsuario.descripcion.equals("Administrador")){
+    		Dashboard.administrador();
+    	}else if (us.tipoUsuario.descripcion.equals("Doctor")){
+    		Dashboard.doctores();
+    	}else{
+    		Dashboard.pacientes();
+    	}
+	}
 }
