@@ -1,6 +1,7 @@
 package models;
 
 import play.*;
+import play.data.validation.Email;
 import play.data.validation.Required;
 import play.db.jpa.*;
 
@@ -27,6 +28,10 @@ public class Paciente extends Model {
 	public String dpi;
 	
 	@Required
+	@Email
+	public String email;
+	
+	@Required
 	public String nombreEmergencia;
 	
 	@Required 
@@ -45,13 +50,14 @@ public class Paciente extends Model {
 	public Municipio municipio;
 	
 	
-	public Paciente(String nombre, String apellido, Date fechaNac, String sexo, int telefono, String dpi, String nombreEmergencia, int telefonoEmergencia, Date ultimaVisita, String referido, String observaciones, Usuario usuario, Municipio municipio ){
+	public Paciente(String nombre, String apellido, Date fechaNac, String sexo, int telefono, String dpi, String email, String nombreEmergencia, int telefonoEmergencia, Date ultimaVisita, String referido, String observaciones, Usuario usuario, Municipio municipio ){
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.fechaNac = fechaNac;
 		this.sexo = sexo;
 		this.telefono = telefono;
 	    this.dpi = dpi;
+	    this.email = email;
 	    this.nombreEmergencia = nombreEmergencia;
 	    this.telefonoEmergencia =telefonoEmergencia;
 	    this.ultimaVisita = ultimaVisita;

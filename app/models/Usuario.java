@@ -29,5 +29,9 @@ public class Usuario extends Model {
 		this.tipoUsuario = tipoUsuario;
 	}
 	
+	public static Usuario connect(String nickName, String password){
+		return find("byNickNameandPassword", nickName, password).first();
+	}
+	
 	
 }

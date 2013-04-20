@@ -1,19 +1,31 @@
 package controllers;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
-import jobs.NewUser;
+import jobs.NuevoUsuario;
 
+import models.HistorialMedico;
 import models.Municipio;
 import models.Paciente;
 import models.Pregunta;
 import models.Usuario;
 
+import play.data.validation.Email;
 import play.data.validation.Required;
 import play.mvc.Controller;
 
 public class Pacientes extends Controller {
+	
+	public static void mostrarPaciente(Paciente paciente){
+		render();
+	}
+	
+	public static void mostrarCrearPaciente(){
+		render();
+	}
 	
 	//POST -- Metodo para crear un nuevo paciente y hace el llamado al Job para enviar el mail con el token de acceso
 	public static void crearPaciente(
@@ -22,38 +34,55 @@ public class Pacientes extends Controller {
 			@Required(message="Fecha de Nacimiento es requerida") Date fechaNac,
 			String sexo, @Required(message="Telefono es requerdio") int telefono,
 			@Required(message="El DPI es requerido") String dpi,
+			@Required(message="El email es requerido")@Email(message="El email es incorrecto") String email,
 			@Required(message="El Nombre de el contacto de Emergencia es requerido") String nombreEmergencia,
 			@Required(message="Telefono de el contacto de Emergencia es requerido") int telefonoEmergencia,
 			Date ultimaVisita, String referido, String observaciones, Municipio municipio){
 		
 		if(validation.hasErrors()){
-			render();
-		}else {
-			Paciente paciente = new Paciente(nombre, apellido, fechaNac, sexo, telefono, dpi, nombreEmergencia, telefonoEmergencia,
-											ultimaVisita, referido, observaciones, null, municipio).save();
-			new NewUser(paciente.id).now();
-			flash.success("Paciente creado correctamente");
-			mostrarFichaMedica(paciente);
+			render("Pacientes/mostrarCrearPaciente", nombre, apellido, fechaNac, sexo, telefono, dpi, email, nombreEmergencia, telefonoEmergencia,
+					ultimaVisita, referido, observaciones, municipio);
 		}
-	}
-	
-	public static void mostrarFichaMedica(Paciente paciente){
-		String nombre = paciente.nombre + " " + paciente.apellido;
-		List<Pregunta> preguntas = Pregunta.findAll();
-		render(nombre, preguntas);
-	}
-	
-	public static void crearFichaMedica(){
-		
+		Paciente paciente = new Paciente(nombre, apellido, fechaNac, sexo, telefono, dpi, email, nombreEmergencia, telefonoEmergencia,
+										ultimaVisita, referido, observaciones, null, municipio).save();
+		new NuevoUsuario(paciente.id, paciente.email);
+		flash.success("Paciente creado correctamente");
+		mostrarFichaMedica(paciente);
 	}
 	
 	//GET
-	public static void showBuscaPaciente(){
+	public static void mostrarFichaMedica(Paciente paciente){
+		List<Pregunta> preguntas = Pregunta.findAll();
+		render(paciente, preguntas);
+	}
+	
+	//POST
+	public static void crearFichaMedica(@Required Map<String, String> respuestas, Paciente paciente){
+		if (validation.hasErrors()){
+			render("Pacientes/mostrarFichaMedica", paciente);
+		}
+		
+		Iterator it = respuestas.entrySet().iterator();
+		
+		while(it.hasNext()){
+			Map.Entry e = (Map.Entry)it.next();
+			long id = Long.valueOf(e.getKey().toString());
+			boolean resultado = Boolean.valueOf(e.getValue().toString());
+			
+			Pregunta pregunta = Pregunta.findById(id);
+			HistorialMedico historial = new HistorialMedico(resultado, paciente, pregunta);
+			historial.save();
+		}
+		mostrarPaciente(paciente);
+	}
+	
+	//GET
+	public static void mostrarBuscaPaciente(){
 		render();
 	}
 		
 	//POST 
-	public static void buscaPaciente(@Required(message="El dato para la busqueda es requerido") String busqueda){
+	public static void buscarPaciente(@Required(message="El dato para la busqueda es requerido") String busqueda){
 		if (validation.hasErrors()){
 			render("Pacientes/showBuscaPaciente",busqueda);
 		}
@@ -62,7 +91,7 @@ public class Pacientes extends Controller {
 		Paciente paciente = Paciente.find("Select p From Paciente p where p.nombre like ? or p.apellido like ? or p.id ==?", busqueda, busqueda, idPaciente).first();
 			
 		if(paciente !=null){
-			render("Paciente/modificaPaciente.html",paciente);
+			mostrarPaciente(paciente);
 		}else{
 			validation.equals(paciente,null).message("Error, no se encontro el paciente");
 			render("Paciente/showBuscPaciente.html",busqueda);
@@ -70,7 +99,7 @@ public class Pacientes extends Controller {
 	}
 	
 	//POST
-	public static void modificaPaciente(@Required(message="El paciente es requerido") long idPaciente,
+	public static void modificarPaciente(@Required(message="El paciente es requerido") long idPaciente,
 										@Required(message="El nombre es requerido") String nombre,
 										@Required(message="El apellido es requerido") String apellido,
 										@Required(message="La fecha de nacimiento es requerida") Date fechanac,
