@@ -7,6 +7,8 @@ import java.util.Map;
 
 import jobs.NuevoUsuario;
 
+import models.Doctor;
+import models.DoctorPaciente;
 import models.HistorialMedico;
 import models.Municipio;
 import models.Paciente;
@@ -45,6 +47,8 @@ public class Pacientes extends Controller {
 		}
 		Paciente paciente = new Paciente(nombre, apellido, fechaNac, sexo, telefono, dpi, email, nombreEmergencia, telefonoEmergencia,
 										ultimaVisita, referido, observaciones, null, municipio).save();
+		Doctor doctor = Doctor.find("byUsuario", Usuario.find("byNickName", Security.connected()).first()).first();
+		new DoctorPaciente(doctor, paciente).save();
 		new NuevoUsuario(paciente.id, paciente.email);
 		flash.success("Paciente creado correctamente");
 		mostrarFichaMedica(paciente);
