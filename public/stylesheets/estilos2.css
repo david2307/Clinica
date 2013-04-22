@@ -1,0 +1,151 @@
+*{
+	margin: 0;
+}
+
+footer{
+	background-color: #9b9b9b;
+	border-bottom-right-radius: 1em;
+	border-bottom-left-radius: 1em;
+	color: white;
+	clear: both;
+	margin:0px auto;
+	max-width: 970px;
+	max-height: 30px;
+	padding: 1em;
+	text-align: center;
+}
+header{
+	border: 10px solid black;
+	display: inline-block;
+	padding: 20px;
+}
+nav ul{
+	background: rgba(0,0,0,.5);
+	font-size: 0;
+	padding: 0;
+}
+nav ul li{
+	box-sizing:border-box;
+	display: inline-block;
+	font-size: 16px;
+	padding: 10px;
+	height: 50px;
+	vertical-align: top;
+	width: 25%;
+	text-align: center;
+}
+nav ul li:hover{
+	background: rgba(0,0,0,.3);
+}
+nav ul li a{
+	color:white;
+	text-transform: uppercase;
+
+}
+
+#button-menu-slider{
+	 z-index: 2;
+	 }
+
+
+#drop-notification li{
+	background: #f0f0f0;
+	border-radius: 0.2em;
+	margin: 10px;
+}
+
+#notification-label{
+	margin: 0 0 0 .01em;
+}
+#contenedor{
+	background: #f0f0f0;
+	box-shadow: 0px 5px 10px rgba(0,0,0,0.5);
+	display: block;
+	margin:0 auto;
+	max-height: 80%;
+	min-height: 80%;
+	max-width: 1000px;
+	margin-bottom: 0px; 
+	overflow: hidden;
+	padding-bottom: 1em;
+	z-index: 1;
+}
+#content-layout{
+	z-index: 0;
+}
+#layout-paciente{
+	margin-left: 20px;
+	height: 800px;
+	width: 1000px;
+}
+#logo{
+	height: auto;
+	width: 20%;
+}
+
+
+#menu-slider{
+	color: white;
+	background: rgba(0,0,0,0.5);
+	box-shadow: 5px 5px 5px  #272822;
+	margin-top: -1.4em;
+	max-height: 500px;
+	min-height: 200px;
+	overflow: hidden;
+	text-align: left;
+	width: 20px;
+	z-index: 2;
+	-webkit-transition: width .5s;
+}
+
+#menu-slider:hover{
+	width: 130px;
+}
+
+/*
+#menu-slider-right{
+	color: white;
+	background: rgba(0,0,0,1);
+	margin-top: -1.4em;
+	max-height: 100%;
+	min-height: 100%;	
+	overflow: hidden;
+	text-align: right;
+	float: right;
+	width: 20px;
+	z-index: 2;
+	-webkit-transition: width .5s;
+} 
+
+#menu-slider-right:hover{
+	width: 130px;
+}
+*/
+#menu-slider-section-1{
+	
+	position: absolute;
+}
+
+
+
+.hidden{
+	display: none;
+}
+
+@media screen and (max-width: 480px){
+	nav ul li {
+		width: 50%;
+	}
+	header{
+		display: block;
+		text-align: center;
+		width: auto;
+	}
+	.avatar, .personal{
+		float: none;
+	}
+	.avatar{
+		display: inline-block;
+		marging:10px 0;
+	}
+}
