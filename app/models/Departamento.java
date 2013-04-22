@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import java.util.*;
 
+
 public class Departamento extends  Model {
 	
 	@Required

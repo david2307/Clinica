@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import java.util.*;
 
+
 public class DiagnosticoSintoma extends Model {
 	
 	@ManyToOne

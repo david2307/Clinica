@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import java.util.*;
 
+@Entity
 public class Usuario extends Model {
 
 	@Required
@@ -30,7 +31,7 @@ public class Usuario extends Model {
 	}
 	
 	public static Usuario connect(String nickName, String password){
-		return find("byNickNameandPassword", nickName, password).first();
+		return find("byNickNameAndPassword", nickName, password).first();
 	}
 	
 	
