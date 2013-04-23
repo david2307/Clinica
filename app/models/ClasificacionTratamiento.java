@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 import java.util.*;
 
-
+@Entity
 public class ClasificacionTratamiento extends Model{
 	
 	public String observaciones;

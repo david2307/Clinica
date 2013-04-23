@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 import java.util.*;
 
-
+@Entity
 public class Paciente extends Model {
 
 	@Required

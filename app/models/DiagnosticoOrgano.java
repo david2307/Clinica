@@ -8,8 +8,8 @@ import javax.persistence.*;
 
 import java.util.*;
 
-
-public class DiagnosticoOrgano {
+@Entity
+public class DiagnosticoOrgano extends Model{
 
 	@Required
 	public String descripcion;

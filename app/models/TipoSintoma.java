@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 import java.util.*;
 
-
+@Entity
 public class TipoSintoma extends Model {
 	
 	@Required 

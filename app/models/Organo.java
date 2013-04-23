@@ -8,8 +8,8 @@ import javax.persistence.*;
 
 import java.util.*;
 
-
-public class Organo {
+@Entity
+public class Organo extends Model{
 	
 	@Required
 	public String nombre;
