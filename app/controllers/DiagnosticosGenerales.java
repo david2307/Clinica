@@ -64,7 +64,6 @@ public class DiagnosticosGenerales extends Controller {
 			
 			List<Sintoma> sintomas = new ArrayList<Sintoma>();
 			Iterator it = diagnosticoSintomas.iterator();
-			
 			while(it.hasNext()){
 				DiagnosticoSintoma diagnosticoSintoma = (DiagnosticoSintoma)it.next();
 				Sintoma addSintoma = diagnosticoSintoma.sintoma;
