@@ -1,0 +1,74 @@
+#{set title: 'Crear Paciente' /}
+
+<h2>Crear Paciente</h2>
+
+#{ifErrors}
+    <h1>Oops...</h1>
+#{/ifErrors}
+
+<article>
+    #{form @Pacientes.crearPaciente()}
+        <p>
+            <label for="nombre">Ingrese el Nombre:</label>
+            <input type="text" name="nombre" value="${nombre}" />
+            <span class="error">#{error 'nombre' /}</span>
+        </p>
+        <p>
+            <label for="apellido">Ingrese el Apellido:</label>
+            <input type="text" name="apellido" value="${apellido}" />
+            <span class="error">#{error 'apellido' /}</span>
+        </p>
+        <p>
+            <label for="fechaNac">Fecha de Nacimiento:</label>
+            <input type="text" name="fechaNac" value="${fechaNac}" />
+            <span class="error">#{error 'fechaNac' /}</span>
+        </p>
+        <p>
+            <label>Sexo:</label>
+            <select name="sexo">
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+            </select>
+        </p>
+        <p>
+            <label for="telefono">Telefono:</label>
+            <input type="text" name="telefono" value="${telefono}" />
+            <span class="error">#{error 'telefono' /}</span>
+        </p>
+        <p>
+            <label for="dpi">DPI:</label>
+            <input type="text" name="dpi" value="${dpi}" />
+            <span class="error">#{error 'dpi' /}</span>
+        </p>
+        <p>
+            <label for="email">Email:</label>
+            <input type="text" name="email" value="${email}" />
+            <span class="error">#{error 'email' /}</span>
+        </p>
+        <p>
+            <label for="nombreEmergencia">Nombre de Contacto de Emergencia</label>
+            <input type="text" name="nombreEmergencia" value="${nombreEmergencia}" />
+            <span class="error">#{error 'nombreEmergencia' /}</span>
+        </p>
+        <p>
+            <label for="telefonoEmergencia">Telefono de Contacto de Emergencia</label>
+            <input type="text" name="telefonoEmergencia" value="${telefonoEmergencia}" />
+            <span class="error">#{error 'telefonoEmergencia' /}</span>
+        </p>
+        <p>
+            <label for="ultimaVisita">Ultima Visita al Dentista:</label>
+            <input type="text" name="ultimaVisita" value="${ultimaVisita}" />
+        </p>
+        <p>
+            <label for="referido">Referido por:</label>
+            <input type="text" name="referido" value="${referido}" />
+        </p>
+        <p>
+            <label for="observaciones">Observaciones:</label>
+            <textarea name="observaciones">${observaciones}</textarea>
+        </p>
+        <p>
+            <input type="submit" value="Crear Paciente" />
+        </p>
+    #{/form}
+</article>

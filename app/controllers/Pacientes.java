@@ -42,11 +42,11 @@ public class Pacientes extends Controller {
 			Date ultimaVisita, String referido, String observaciones, Municipio municipio){
 		
 		if(validation.hasErrors()){
-			render("Pacientes/mostrarCrearPaciente", nombre, apellido, fechaNac, sexo, telefono, dpi, email, nombreEmergencia, telefonoEmergencia,
+			render("Pacientes/mostrarCrearPaciente.html", nombre, apellido, fechaNac, sexo, telefono, dpi, email, nombreEmergencia, telefonoEmergencia,
 					ultimaVisita, referido, observaciones, municipio);
 		}
 		Paciente paciente = new Paciente(nombre, apellido, fechaNac, sexo, telefono, dpi, email, nombreEmergencia, telefonoEmergencia,
-										ultimaVisita, referido, observaciones, null, municipio).save();
+										ultimaVisita, referido, observaciones, null, null).save();
 		Doctor doctor = Doctor.find("byUsuario", Usuario.find("byNickName", Security.connected()).first()).first();
 		new DoctorPaciente(doctor, paciente).save();
 		new NuevoUsuario(paciente.id, paciente.email);

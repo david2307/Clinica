@@ -1,0 +1,22 @@
+<h2>Historial Medico</h2>
+
+#{if preguntas}
+    <div>
+        #{form @Pacientes.crearFichaMedica()}
+            #{list items:preguntas, as:'pregunta'}
+                <article>
+                    <label for="respuestas[${pregunta.id}]">${pregunta.descripcion}</label>
+                    <input type="radio" name="respuestas[${pregunta.id}]" value="true">Si</input>
+                    <input type="radio" name="respuestas[${pregunta.id}]" value="false">No</input>
+                </article>
+            #{/list}
+            <input type="submit" value="Registrar Ficha Medica" />
+        #{/form}
+    </div>
+#{/if}
+
+#{else}
+    <div>
+        <p>No se encontraron preguntas para el Historial Medico</p>
+    </div>
+#{/else}

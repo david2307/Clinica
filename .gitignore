@@ -166,6 +166,6 @@ pip-log.txt
 #################
 ## Play Framework
 #################
-
+/conf/application.conf
 /modules/*
 /eclipse/*
