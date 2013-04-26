@@ -38,7 +38,7 @@ public class Usuarios extends Controller {
 			                        @Required(message="El tipo de usuario es requerido") TipoUsuario tipoUsuario){
 		
 		if(validation.hasErrors()){
-			render("Pacientes/crearUsuario",nickName,password,paciente);
+			render("Pacientes/crearUsuario.html",nickName,password,paciente);
 		}
 		//validando si el nickName existe
 		Usuario usuario = Usuario.find("byNickName", nickName).first();
@@ -57,15 +57,15 @@ public class Usuarios extends Controller {
 					Security.authenticate(nickName, password);
 				}else{
 					validation.equals(buscaPaciente,null).message("Error, no se encontro el paciente");
-					render("Usuarios/crearUsuario",nickName,password,paciente);
+					render("Usuarios/crearUsuario.html",nickName,password,paciente);
 				}
 			}else{
 				validation.equals(crearUsuario,null).message("Error, no se pudo crear el usuario");
-				render("Usuarios/crearUsuario",nickName,password,paciente);
+				render("Usuarios/crearUsuario.html",nickName,password,paciente);
 			}
 		}else{
 			validation.equals(usuario,null).message("Error, el nickName ya está registrado");
-			render("Usuarios/crearUsuario",nickName,password,paciente);
+			render("Usuarios/crearUsuario.html",nickName,password,paciente);
 		}
 	}
 	
@@ -83,7 +83,7 @@ public class Usuarios extends Controller {
 										@Required(message="El estado es requerido")  boolean estado,
 										@Required(message="El tipo de usuario es requerido") TipoUsuario tipoUsuario ){
 		if(validation.hasErrors()){
-			render("Usuarios/mostraModificarUsuario",nickName,password,estado);
+			render("Usuarios/mostraModificarUsuario.html",nickName,password,estado);
 		}
 		Usuario usuario = Usuario.find("byNickName", nickName).first();
 		
@@ -98,7 +98,7 @@ public class Usuarios extends Controller {
 			}
 		}else{
 			validation.equals(usuario,null).message("Error, no se encontro el usuario");
-			render("Usuarios/modificarUsuario",nickName,password,estado,tipoUsuario);
+			render("Usuarios/modificarUsuario.html",nickName,password,estado,tipoUsuario);
 		}
 		
 	}

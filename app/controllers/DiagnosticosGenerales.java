@@ -28,7 +28,7 @@ public class DiagnosticosGenerales extends Controller {
 											   @Required(message="La cita es requerida")long cita,
 											   @Required(message="Sintoma es requerido")List<Sintoma> sintomas){
 		if(validation.hasErrors()){
-			render("DiagnosticosGenerales/mostrarCrearDiagnosticoGeneral",descripcion,tipo,cita,sintomas);
+			render("DiagnosticosGenerales/mostrarCrearDiagnosticoGeneral.html",descripcion,tipo,cita,sintomas);
 		}
 		Cita buscaCita = Cita.findById(cita);
 		
@@ -49,7 +49,7 @@ public class DiagnosticosGenerales extends Controller {
 			}
 		}else{
 			validation.equals(buscaCita,null).message("Error, no se encontro la cita");
-			render("DiagnosticosGenerales/crearDiagnosticoGeneral",descripcion,tipo,cita);
+			render("DiagnosticosGenerales/crearDiagnosticoGeneral.html",descripcion,tipo,cita);
 		}
 		
 	}
@@ -83,20 +83,42 @@ public class DiagnosticosGenerales extends Controller {
 												   @Required(message="El tipo es requirido")int tipo,
 												   @Required(message="Sintoma es requerido")List<Sintoma> sintomas){
 		if(validation.hasErrors()){
-			render("DiagnosticosGenerales/modificarDiagnosticoGeneral",idDiagnosticoGeneral,descripcion,tipo);
+			render("DiagnosticosGenerales/modificarDiagnosticoGeneral.html",idDiagnosticoGeneral,descripcion,tipo);
 		}
 		
 		DiagnosticoGeneral diagnostico = DiagnosticoGeneral.findById(idDiagnosticoGeneral);
 		if(diagnostico != null){
+			
 			diagnostico.descripcion = descripcion;
 			diagnostico.tipo = tipo;
 			if(diagnostico.validateAndSave()){
+				
+				//borrar todos los sintomas de asociados a este diagnostico
+				List<DiagnosticoSintoma> diagnosticoSintoma = DiagnosticoSintoma.find("byDiagnosticoGeneral", diagnostico).fetch();
+				if(diagnosticoSintoma != null){
+					Iterator it = diagnosticoSintoma.iterator();
+					
+						while(it.hasNext()){
+							DiagnosticoSintoma diagSintoma = (DiagnosticoSintoma)it.next();
+							diagSintoma.delete();
+						}
+				}
+				
+				//Agregar el nuevo listado de sintomas al diagnostico
+                Iterator iterator = sintomas.iterator();
+				
+				while(iterator.hasNext()){
+					Sintoma sintoma = (Sintoma)iterator.next();
+					DiagnosticoSintoma diagSintoma2 =new DiagnosticoSintoma(diagnostico,sintoma);
+					diagSintoma2.save();					
+				}
+							
 				flash.success("Diagnostico General modificado exitosamente");
 				Security.onAuthenticated();				
 			}
 		}else{
 			validation.equals(diagnostico,null).message("Error, no se encontro diagnostico");
-			render("DiagnosticosGenerales/crearDiagnosticoGeneral",idDiagnosticoGeneral,descripcion,tipo);
+			render("DiagnosticosGenerales/crearDiagnosticoGeneral.html",idDiagnosticoGeneral,descripcion,tipo);
 		}
 	}
 	
