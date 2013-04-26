@@ -2,7 +2,7 @@
 
 #{if preguntas}
     <div>
-        #{form @Pacientes.crearFichaMedica()}
+        #{form @Pacientes.crearFichaMedica(idPaciente)}
             #{list items:preguntas, as:'pregunta'}
                 <article>
                     <label for="respuestas[${pregunta.id}]">${pregunta.descripcion}</label>

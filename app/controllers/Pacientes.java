@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import jobs.NuevoUsuario;
 
@@ -21,8 +22,17 @@ import play.mvc.Controller;
 
 public class Pacientes extends Controller {
 	
-	public static void mostrarPaciente(Paciente paciente){
-		render();
+	public static void mostrarPaciente(@Required(message="El ID del Paciente es Requerido") Long idPaciente){
+		if (validation.hasErrors()){
+			render("Pacientes/mostrarBuscarPaciente");
+		}
+		Paciente paciente = Paciente.findById(idPaciente);
+		if (paciente != null){
+			render(paciente);
+		}else{
+			validation.equals(paciente, null).message("El Paciente no Existe");
+			render("Pacientes/mostrarBuscarPaciente");
+		}
 	}
 	
 	public static void mostrarCrearPaciente(){
@@ -49,24 +59,28 @@ public class Pacientes extends Controller {
 										ultimaVisita, referido, observaciones, null, null).save();
 		Doctor doctor = Doctor.find("byUsuario", Usuario.find("byNickName", Security.connected()).first()).first();
 		new DoctorPaciente(doctor, paciente).save();
-		new NuevoUsuario(paciente.id, paciente.email);
+		new NuevoUsuario(paciente.id, paciente.email).now();
 		flash.success("Paciente creado correctamente");
-		mostrarFichaMedica(paciente);
+		mostrarFichaMedica(paciente.id);
 	}
 	
 	//GET
-	public static void mostrarFichaMedica(Paciente paciente){
+	public static void mostrarFichaMedica(Long idPaciente){
 		List<Pregunta> preguntas = Pregunta.findAll();
-		render(paciente, preguntas);
+		render(idPaciente, preguntas);
 	}
 	
 	//POST
-	public static void crearFichaMedica(@Required Map<String, String> respuestas, Paciente paciente){
+	public static void crearFichaMedica(@Required Long idPaciente, @Required Map<String, String> respuestas){
 		if (validation.hasErrors()){
-			render("Pacientes/mostrarFichaMedica", paciente);
+			System.out.println("" + idPaciente);
+			render("Pacientes/mostrarFichaMedica", idPaciente, respuestas);
 		}
 		
+		System.out.println("" + idPaciente);
+		System.out.println("" + respuestas.size());
 		Iterator it = respuestas.entrySet().iterator();
+		Paciente paciente = Paciente.findById(idPaciente);
 		
 		while(it.hasNext()){
 			Map.Entry e = (Map.Entry)it.next();
@@ -77,7 +91,7 @@ public class Pacientes extends Controller {
 			HistorialMedico historial = new HistorialMedico(resultado, paciente, pregunta);
 			historial.save();
 		}
-		mostrarPaciente(paciente);
+		mostrarPaciente(paciente.id);
 	}
 	
 	//GET
@@ -95,7 +109,7 @@ public class Pacientes extends Controller {
 		Paciente paciente = Paciente.find("Select p From Paciente p where p.nombre like ? or p.apellido like ? or p.id ==?", busqueda, busqueda, idPaciente).first();
 			
 		if(paciente !=null){
-			mostrarPaciente(paciente);
+			mostrarPaciente(idPaciente);
 		}else{
 			validation.equals(paciente,null).message("Error, no se encontro el paciente");
 			render("Paciente/showBuscPaciente.html",busqueda);

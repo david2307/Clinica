@@ -22,3 +22,18 @@ Doctor(doctor1):
     telefono:           78865468
     dpi:                1564-564879-897
     usuario:            usuario1
+
+Pregunta(pregunta1):
+    descripcion:        Padece presion alta(hipertension)?
+
+Pregunta(pregunta2):
+    descripcion:        Padece o ha padecido otra enfermedad cardiovascular?
+
+Pregunta(pregunta3):
+    descripcion:        Padece de asma?
+
+Pregunta(pregunta4):
+    descripcion:        Padece de algun problema endocrino?
+
+Pregunta(pregunta5):
+    descripcion:        Padece Diabetes?
