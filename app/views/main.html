@@ -6,7 +6,7 @@
         <meta charset="${_response_encoding}">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        <link rel="stylesheet" media="screen" type="text/css" href="@{'/public/stylesheets/estilos2.css'}">
+        <link rel="stylesheet" media="screen" type="text/css" href="@{'/public/stylesheets/style.css'}">
         <link rel="stylesheet" media="screen" type="text/css" href="@{'/public/stylesheets/bootstrap.css'}">
         <link rel="stylesheet" media="screen" type="text/css" href="@{'/public/stylesheets/bootstrap-responsive.css'}">
         #{get 'moreStyles' /}
@@ -17,10 +17,22 @@
         <script src="@{'/public/javascripts/bootstrap-tooltip.js'}" type="text/javascript"></script>
         <script src="@{'/public/javascripts/bootstrap-twipsy.js'}" type="text/javascript"></script>
         <script src="@{'/public/javascripts/bootstrap-popover.js'}" type="text/javascript"></script>
+        <script src="@{'/public/javascripts/nav.js'}" type="text/javascript"></script>
         #{get 'moreScripts' /}
     </head>
     
     <body>
+        <section id="overlay"></section>
+
+        <nav>
+                  <ul id="menu" class="menu">
+                    <li> <a href="#" id="about"> <img src="/public/images/1_menu.jpg" alt=""/> <span class="active"></span> <span class="wrap"> <span class="link">About me</span> <span class="descr">Know me</span> </span> </a> </li>
+                    <li> <a href="#" id="projects"> <img src="/public/images/2_menu.jpg" alt=""/> <span class="active"></span> <span class="wrap"> <span class="link">Projects</span> <span class="descr">My work</span> </span> </a> </li>
+                    <li> <a href="#" id="contact"> <img src="/public/images/3_menu.jpg" alt=""/> <span class="active"></span> <span class="wrap"> <span class="link">Contact</span> <span class="descr">Get in touch</span> </span> </a> </li>
+                    <li > <a href="#" id="blog"> <img src="/public/images/1_menu.jpg" alt=""/> <span class="active"></span> <span class="wrap"> <span class="link">Blog</span> <span class="descr">Daily musings</span> </span> </a> </li>
+                  </ul>
+        </nav>
+
         <section id="content-layout">
             #{doLayout /}
         </section>
