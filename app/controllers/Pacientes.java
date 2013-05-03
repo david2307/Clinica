@@ -22,6 +22,20 @@ import play.mvc.Controller;
 
 public class Pacientes extends Controller {
 	
+	public static void listadoPacientes(){
+		Doctor doctor = Doctor.find("byUsuario", Usuario.find("byNickName", Security.connected()).first()).first();
+		List<DoctorPaciente> doctorPaciente = DoctorPaciente.find("byDoctor", doctor).fetch();
+		List<Paciente> pacientes = null;
+		
+		if (doctorPaciente.isEmpty()){
+			
+		}else {
+			for (int i=0; i<doctorPaciente.size(); i++){
+				pacientes.add(doctorPaciente.get(i).paciente);
+			}
+		}
+	}
+	
 	public static void mostrarPaciente(@Required(message="El ID del Paciente es Requerido") Long idPaciente){
 		if (validation.hasErrors()){
 			render("Pacientes/mostrarBuscarPaciente");
