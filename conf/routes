@@ -15,6 +15,9 @@ GET     /favicon.ico                            404
 # Import Secure Routes
 *		/										module:secure
 
+GET     /pacientes/crearPaciente                Pacientes.mostrarCrearPaciente
+POST    /pacientes/crearPaciente                Pacientes.crearPaciente
+
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
