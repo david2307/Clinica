@@ -1,2 +1,25 @@
 #{extends 'maindash.html' /}
 #{set title: 'Paciente' /}
+
+<article>
+    <h2>Perfil del Paciente</h2>
+    <label>Nombre: ${paciente.nombre}</label>
+    <label>Apellido: ${paciente.apellido}</label>
+    <label>Fecha de Nacimiento: ${paciente.fechaNac}</label>
+    <label>Sexo: ${paciente.sexo}</label>
+    <label>Direccion: ${paciente.direccion}</label>
+    <label>Telefono: ${paciente.telefono}</label>
+    <label>DPI: ${paciente.dpi}</label>
+    <label>Email: ${paciente.email}</label>
+    </br>
+    <h2>Contacto de Emergencia</h2>
+    <label>Nombre: ${paciente.nombreEmergencia}</label>
+    <label>Telefono: ${paciente.telefonoEmergencia}</label>
+    </br>
+    <h2>Otros</h2>
+    <label>Ultima Visita al Doctor: ${paciente.ultimaVisita}</label>
+    <label>Referido por: ${paciente.referido}</label>
+    <label>Observaciones: ${paciente.observaciones}</label>
+    </br>
+    <a href="@{Pacientes.mostrarModificarPaciente(paciente.id)}">Editar Perfil</a>
+</article>

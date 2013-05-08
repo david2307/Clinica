@@ -31,14 +31,14 @@ public class Pacientes extends Controller {
 	
 	public static void mostrarPaciente(@Required(message="El ID del Paciente es Requerido") Long idPaciente){
 		if (validation.hasErrors()){
-			render("Pacientes/mostrarBuscarPaciente");
+			render("Pacientes/listadoPacientes");
 		}
 		Paciente paciente = Paciente.findById(idPaciente);
 		if (paciente != null){
 			render(paciente);
 		}else{
 			validation.equals(paciente, null).message("El Paciente no Existe");
-			render("Pacientes/mostrarBuscarPaciente");
+			render("Pacientes/listadoPacientes");
 		}
 	}
 	
@@ -51,7 +51,8 @@ public class Pacientes extends Controller {
 			@Required(message="El Nombre es requerido") String nombre,
 			@Required(message="El Apellido es requerido") String apellido,
 			@Required(message="Fecha de Nacimiento es requerida") Date fechaNac,
-			String sexo, @Required(message="Telefono es requerdio") int telefono,
+			String sexo, @Required(message="La direccion es requerdia")String direccion,
+			@Required(message="Telefono es requerdio") int telefono,
 			@Required(message="El DPI es requerido") String dpi,
 			@Required(message="El email es requerido")@Email(message="El email es incorrecto") String email,
 			@Required(message="El Nombre de el contacto de Emergencia es requerido") String nombreEmergencia,
@@ -62,8 +63,8 @@ public class Pacientes extends Controller {
 			render("Pacientes/mostrarCrearPaciente.html", nombre, apellido, fechaNac, sexo, telefono, dpi, email, nombreEmergencia, telefonoEmergencia,
 					ultimaVisita, referido, observaciones, municipio);
 		}
-		Paciente paciente = new Paciente(nombre, apellido, fechaNac, sexo, telefono, dpi, email, nombreEmergencia, telefonoEmergencia,
-										ultimaVisita, referido, observaciones, null, null).save();
+		Paciente paciente = new Paciente(nombre, apellido, fechaNac, sexo, direccion, telefono, dpi, email, nombreEmergencia, telefonoEmergencia,
+										ultimaVisita, referido, observaciones, null, null, null).save();
 		Doctor doctor = Doctor.find("byUsuario", Usuario.find("byNickName", Security.connected()).first()).first();
 		new DoctorPaciente(doctor, paciente).save();
 		new NuevoUsuario(paciente.id, paciente.email).now();
@@ -123,50 +124,53 @@ public class Pacientes extends Controller {
 		}
 	}
 	
+	public static void mostrarModificarPaciente(Long idPaciente){
+		Paciente paciente = Paciente.findById(idPaciente);
+		render(paciente);
+	}
+	
 	//POST
-	public static void modificarPaciente(@Required(message="El paciente es requerido") long idPaciente,
-										@Required(message="El nombre es requerido") String nombre,
-										@Required(message="El apellido es requerido") String apellido,
-										@Required(message="La fecha de nacimiento es requerida") Date fechanac,
-										@Required(message="El sexo es requerido") String sexo,
-										@Required(message="La direccion es requerido") String direccion,
-										@Required(message="El telefono es requerido") int telefono,
-										String dpi, String nombreEmergencia, int telefonoEmergencia,
-										@Required(message="El municipio es requerido") Municipio municipio,
-										Usuario usuario, Date ultimaVisita, String requerido, String observaciones){
+	public static void modificarPaciente(
+			@Required(message="El ID del paciente es requerido") long idPaciente,
+			@Required(message="El Nombre es requerido") String nombre,
+			@Required(message="El Apellido es requerido") String apellido,
+			@Required(message="Fecha de Nacimiento es requerida") Date fechaNac,
+			String sexo, @Required(message="La direccion es requerida") String direccion,
+			@Required(message="Telefono es requerdio") int telefono,
+			@Required(message="El DPI es requerido") String dpi,
+			@Required(message="El email es requerido")@Email(message="El email es incorrecto") String email,
+			@Required(message="El Nombre de el contacto de Emergencia es requerido") String nombreEmergencia,
+			@Required(message="Telefono de el contacto de Emergencia es requerido") int telefonoEmergencia,
+			Date ultimaVisita, String referido, String observaciones, Municipio municipio){
 		if (validation.hasErrors()){
-			render(idPaciente, nombre, apellido, fechanac, sexo, direccion, telefono, dpi, nombreEmergencia, telefono, dpi, nombreEmergencia,
-					telefonoEmergencia, municipio, usuario, ultimaVisita, requerido, observaciones);
+			Paciente paciente = Paciente.findById(idPaciente);
+			render("Pacientes/mostrarModificarPaciente.html", paciente);
 		}
 			
 		Paciente paciente = Paciente.findById(idPaciente);
 		if(paciente != null){
 			paciente.nombre = nombre;
 			paciente.apellido = apellido;
-			paciente.fechaNac = fechanac;
+			paciente.fechaNac = fechaNac;
 			paciente.sexo = sexo;
 			paciente.telefono = telefono;
 			paciente.dpi = dpi;
 			paciente.nombreEmergencia =nombreEmergencia;
 			paciente.telefonoEmergencia = telefonoEmergencia;
-			paciente.municipio = municipio;
-			paciente.usuario = usuario; 
 			paciente.ultimaVisita = ultimaVisita;
-			paciente.referido = requerido;
+			paciente.referido = referido;
 			paciente.observaciones = observaciones;
-			
+		
 			if(paciente.validateAndSave()){
-				if(paciente.validateAndSave()){
-					flash.success("El paciente se modificado exitosamente");
-					render("Paciente/show.hml");					
-				}else{
-					validation.equals(paciente,!paciente.validateAndSave()).message("Error, no se pudo modificar el paciente");
-					render("Paciente/show.html");
-				}
+				flash.success("El paciente se modificado exitosamente");
+				mostrarPaciente(paciente.id);					
+			}else{
+				validation.equals(paciente,!paciente.validateAndSave()).message("Error, no se pudo modificar el paciente");
+				mostrarModificarPaciente(paciente.id);
 			}
 		}else{
 			validation.equals(paciente,null).message("Error, no se encontro el paciente");
-			render("Paciente/showBuscPaciente.html");
+			listadoPacientes();
 		}		
 	}
 }

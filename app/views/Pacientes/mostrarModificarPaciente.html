@@ -1,27 +1,31 @@
 #{extends 'maindash.html' /}
-#{set title: 'Crear Paciente' /}
+#{set title: 'Modificar Paciente' /}
 
-<h2>Crear Paciente</h2>
+<h1>Modificar Paciente</h1>
 
 #{ifErrors}
-    <h1>Oops...</h1>
+    <h2>Oops...</h2>
 #{/ifErrors}
 
 <article>
-    #{form @Pacientes.crearPaciente()}
+    #{form @Pacientes.modificarPaciente()}
+        <p>
+            <label for="idPaciente">ID del Paciente:</label>
+            <input type="text" name="idPaciente" value="${paciente.id}"/>
+        </p>
         <p>
             <label for="nombre">Ingrese el Nombre:</label>
-            <input type="text" name="nombre" value="${nombre}" />
+            <input type="text" name="nombre" value="${paciente.nombre}" />
             <span class="error">#{error 'nombre' /}</span>
         </p>
         <p>
             <label for="apellido">Ingrese el Apellido:</label>
-            <input type="text" name="apellido" value="${apellido}" />
+            <input type="text" name="apellido" value="${paciente.apellido}" />
             <span class="error">#{error 'apellido' /}</span>
         </p>
         <p>
             <label for="fechaNac">Fecha de Nacimiento:</label>
-            <input type="text" name="fechaNac" value="${fechaNac}" />
+            <input type="text" name="fechaNac" value="${paciente.fechaNac}" />
             <span class="error">#{error 'fechaNac' /}</span>
         </p>
         <p>
@@ -33,48 +37,48 @@
         </p>
         <p>
             <label>Direccion:</label>
-            <input type="text" name="direccion" value="${direccion}" />
+            <input type="text" name="direccion" value="${paciente.direccion}" />
             <span class="error">#{error 'direccion' /}</span>
         </p>
         <p>
             <label for="telefono">Telefono:</label>
-            <input type="text" name="telefono" value="${telefono}" />
+            <input type="text" name="telefono" value="${paciente.telefono}" />
             <span class="error">#{error 'telefono' /}</span>
         </p>
         <p>
             <label for="dpi">DPI:</label>
-            <input type="text" name="dpi" value="${dpi}" />
+            <input type="text" name="dpi" value="${paciente.dpi}" />
             <span class="error">#{error 'dpi' /}</span>
         </p>
         <p>
             <label for="email">Email:</label>
-            <input type="text" name="email" value="${email}" />
+            <input type="text" name="email" value="${paciente.email}" />
             <span class="error">#{error 'email' /}</span>
         </p>
         <p>
             <label for="nombreEmergencia">Nombre de Contacto de Emergencia</label>
-            <input type="text" name="nombreEmergencia" value="${nombreEmergencia}" />
+            <input type="text" name="nombreEmergencia" value="${paciente.nombreEmergencia}" />
             <span class="error">#{error 'nombreEmergencia' /}</span>
         </p>
         <p>
             <label for="telefonoEmergencia">Telefono de Contacto de Emergencia</label>
-            <input type="text" name="telefonoEmergencia" value="${telefonoEmergencia}" />
+            <input type="text" name="telefonoEmergencia" value="${paciente.telefonoEmergencia}" />
             <span class="error">#{error 'telefonoEmergencia' /}</span>
         </p>
         <p>
             <label for="ultimaVisita">Ultima Visita al Dentista:</label>
-            <input type="text" name="ultimaVisita" value="${ultimaVisita}" />
+            <input type="text" name="ultimaVisita" value="${paciente.ultimaVisita}" />
         </p>
         <p>
             <label for="referido">Referido por:</label>
-            <input type="text" name="referido" value="${referido}" />
+            <input type="text" name="referido" value="${paciente.referido}" />
         </p>
         <p>
             <label for="observaciones">Observaciones:</label>
-            <textarea name="observaciones">${observaciones}</textarea>
+            <textarea name="observaciones">${paciente.observaciones}</textarea>
         </p>
         <p>
-            <input type="submit" value="Crear Paciente" />
+            <input type="submit" value="Modificar Paciente" />
         </p>
     #{/form}
 </article>
