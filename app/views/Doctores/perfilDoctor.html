@@ -1,0 +1,17 @@
+#{extends 'maindash.html'/}
+#{set title: 'Perfil de Doctor' /}
+
+<h2>Perfil del Doctor</h2>
+
+#{ifErrors}
+    <h1>Error...</h1>
+#{/ifErrors}
+
+<article>
+	<h3>Informacion del Doctor</h3>
+	<label>Nombre :</label>${doctor.nombre}
+	<label>Apellido :</label>${doctor.apellido}
+	<label>Direccion:</label>${doctor.direccion}
+	<label>Sexo:</label>${doctor.sexo}
+	<a href="/doctores/mostrarModificarDoctor?idDoctor=${doctor.id}" >Modificar</a>
+</article>

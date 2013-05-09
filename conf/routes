@@ -23,5 +23,11 @@ GET     /public/                                staticDir:public
 GET     /pacientes/crearpaciente                Pacientes.mostrarCrearPaciente
 POST    /pacientes/crearpaciente                Pacientes.crearPaciente
 
+# Rutas de Doctores
+
+GET		/doctores/creardoctor					Doctores.mostrarCrearDoctor
+POST	/doctores/creardoctor					Doctores.crearDoctor		
+
+
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
