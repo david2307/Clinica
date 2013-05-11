@@ -13,6 +13,12 @@ Usuario(usuario1):
     status:             True
     tipoUsuario:        tipo2
 
+Usuario(usuario2):
+    nickName:           agarcia
+    password:           12345
+    status:             True
+    tipoUsuario:        tipo3
+
 Doctor(doctor1):
     nombre:             Mario
     apellido:           Garcia
@@ -22,6 +28,24 @@ Doctor(doctor1):
     telefono:           78865468
     dpi:                1564-564879-897
     usuario:            usuario1
+
+Paciente(paciente1):
+    nombre:             Alex
+    apellido:           Garcia
+    fechaNac:           10-05-1988
+    sexo:               Masculino
+    direccion:          El Molino
+    telefono:           55556666
+    dpi:                1564-564879-897
+    email:              agarcia@codea.la
+    nombreEmergencia:   Nadie
+    telefonoEmergencia: 11111111
+    usuario:            usuario2
+
+DoctorPaciente(doctorpaciente1):
+    doctor:             doctor1
+    paciente:           paciente1
+        
 
 Pregunta(pregunta1):
     descripcion:        Padece presion alta(hipertension)?

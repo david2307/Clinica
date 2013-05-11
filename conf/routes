@@ -28,6 +28,11 @@ POST    /pacientes/crearpaciente                Pacientes.crearPaciente
 GET		/doctores/creardoctor					Doctores.mostrarCrearDoctor
 POST	/doctores/creardoctor					Doctores.crearDoctor		
 
+# Rutas para usuarios
+
+GET 	/usuarios/crearUsuario					Usuarios.mostrarCrearUsuario
+POST 	/usuarios/crearUsuario					Usuarios.crearUsuario
+
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}

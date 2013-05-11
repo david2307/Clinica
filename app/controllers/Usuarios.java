@@ -16,56 +16,75 @@ import play.mvc.Controller;
 public class Usuarios extends Controller {
 	
 	//GET
-	public static void mostrarCrearUsuario(@Required(message="El token es requerido") String token){
+	public static void mostrarCrearUsuarios(@Required(message="El token es requerido") String token){
 		if(validation.hasErrors()){
 			render();
 		}
 		Crypto crypto = new Crypto();
 		long idUsuario = Long.valueOf(crypto.decryptAES(token));
 		Paciente paciente = Paciente.findById(idUsuario);
-		List<TipoUsuario> tiposUsuario = TipoUsuario.findAll();
 		if(paciente != null){
-			render(paciente, tiposUsuario);
+			render(paciente);
 		}else{
-			render("Pacientes/show.html");
+			Security.onAuthenticated();
 		}
 	}
+	
+	//GET
+		public static void mostrarCrearUsuario(@Required(message="El id es requerido") long id){
+			if(validation.hasErrors()){
+				render();
+			}
+			Paciente paciente = Paciente.findById(id);
+			if(paciente != null){
+				render(paciente);
+			}else{
+				Security.onAuthenticated();
+			}
+		}
 	
 	//POST
 	public static void crearUsuario(@Required(message="El nickName es requerido")String nickName, 
 			                        @Required(message="El password es requerido")String password,
-			                        @Required(message="El paciente es requerido")Long paciente,
-			                        @Required(message="El tipo de usuario es requerido") TipoUsuario tipoUsuario){
+			                        @Required(message="El paciente es requerido")Long pacente,
+			                        @Required(message="El tipo de usuario es requerido") int tipo){
 		
 		if(validation.hasErrors()){
-			render("Pacientes/crearUsuario.html",nickName,password,paciente);
+			Paciente paciente = Paciente.findById(pacente);
+			render("Usuarios/mostrarCrearUsuario.html",nickName,password,paciente);
 		}
 		//validando si el nickName existe
 		Usuario usuario = Usuario.find("byNickName", nickName).first();
+		Paciente paciente = Paciente.findById(pacente);
 		if(usuario == null){
+			System.out.println("el usuario es valido");
 			Crypto crypto = new Crypto();
 			String pass = crypto.encryptAES(String.valueOf(password));
+			TipoUsuario tipoUsuario = TipoUsuario.findById((long)tipo);
 			Usuario crearUsuario = new Usuario(nickName,pass,true,tipoUsuario).save();
-			
+						
 			if(crearUsuario !=null){
-				Paciente buscaPaciente = Paciente.findById(paciente);
+				System.out.println("se creo el usuario");
+				Paciente buscaPaciente = Paciente.findById(pacente);
 				
 				if(buscaPaciente != null){
-					
 					buscaPaciente.usuario = crearUsuario;
-					buscaPaciente.validateAndSave();
-					Security.authenticate(nickName, password);
+					buscaPaciente.save();
+					System.out.println("se modifico el paciente");
+					Security.onAuthenticated();
+					
+					//Security.authenticate(nickName, password);
 				}else{
 					validation.equals(buscaPaciente,null).message("Error, no se encontro el paciente");
-					render("Usuarios/crearUsuario.html",nickName,password,paciente);
+					render("Usuarios/mostrarCrearUsuario.html",nickName,password,paciente);
 				}
 			}else{
 				validation.equals(crearUsuario,null).message("Error, no se pudo crear el usuario");
-				render("Usuarios/crearUsuario.html",nickName,password,paciente);
+				render("Usuarios/mostrarCrearUsuario.html",nickName,password,paciente);
 			}
 		}else{
 			validation.equals(usuario,null).message("Error, el nickName ya está registrado");
-			render("Usuarios/crearUsuario.html",nickName,password,paciente);
+			render("Usuarios/mostrarCrearUsuario.html",nickName,password,paciente);
 		}
 	}
 	

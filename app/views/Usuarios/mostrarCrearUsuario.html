@@ -1,0 +1,29 @@
+#{extends 'maindash.html'/}
+#{set title: 'Crear Usuario' /}
+
+<h2>Crear Usuario</h2>
+
+#{ifErrors}
+    <h1>Error...</h1>
+#{/ifErrors}
+
+<article>
+	<p>Datos del paciente</p>
+	<p>${paciente.nombre} ${paciente.apellido}</p>
+	<p>Usuario</p>
+	#{form @Usuarios.crearUsuario()}
+		<p>
+			<label for="nickName">Usuario</label>
+			<input type="text" name="nickName" value="${nickName}">
+			<span class="error">#{error 'usuario' /}</span>
+		</p>
+		<p>
+			<label for="password">Contraseña</label>
+			<input type="text" name="password" value="${password}">
+			<span class="error">#{error 'password' /}</span>
+		</p>
+		<input type="text" name="pacente" value="${paciente.id}">
+		<input type="hidden" name="tipo" value="3">
+		<input type="submit" value="Crear Usuario">
+	#{/form}
+</article>

@@ -90,8 +90,8 @@ public class Doctores extends Controller {
 						doctor.sexo = sexo;
 						doctor.direccion = direccion;
 						doctor.telefono = telefono;
+						doctor.dpi = dpi;
 						if(doctor.validateAndSave()){
-							System.out.println("no ocurrio erro al guardar");
 							flash.success("Doctor modificado correctamente");
 							perfilDoctor(doctor.id);
 						}else{
@@ -101,33 +101,12 @@ public class Doctores extends Controller {
 						
 					}
 					
-			}
-		
-		
-		
-		
-		
-		
-		
-		
-	//GET
-	public static void pacientesDoctor(){
-		Usuario usuario = Usuario.find("byNickName", Security.connected()).first();
-		if(usuario != null){
-			Doctor doctor = Doctor.find("byUsuario", usuario).first();
-		    if(doctor != null){
-		    	List<Paciente> pacientes = Paciente.find("ByDoctor", doctor).fetch();
-		    	if(pacientes != null){
-		    		render(pacientes);
-		    	}else{
-		    		//perfilDoctor();
-		    	}
-		    }else{
-		    	render("Doctores/show.html");
-		    }
-		}else{
-			render("Doctores/show.html");
 		}
 		
-	}
+		//GET 
+		public static void listadoDoctores(){
+			List<Doctor> doctores = Doctor.findAll();
+			render(doctores);
+		}
+		
 }

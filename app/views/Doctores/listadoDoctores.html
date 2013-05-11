@@ -1,0 +1,23 @@
+#{extends 'maindash.html'/}
+#{set title: 'listado de Doctores' /}
+
+<h2>Listado de Doctores</h2>
+
+#{ifErrors}
+    <h1>Error...</h1>
+#{/ifErrors}
+
+<article>
+	#{if doctores}
+		<a href="@{Doctores.mostrarCrearDoctor()}">Nuevo Doctor</a>
+	    #{list items:doctores, as:'doctor'}
+	    	<label>
+	    		${doctor.nombre} ${doctor.apellido} <a href="@{Doctores.mostrarModificarDoctor(doctor.id)}"> modificar</a>
+	    	</label>	    		
+	    #{/list}
+	#{/if}
+
+	#{else}
+	    <p>No existen Pacientes Creados</p>
+	#{/else}
+</article>
