@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="es_ES">
     <head>
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
@@ -42,9 +42,9 @@
                         <div class="nav-collapse collapse">
                             <ul class="nav">
                                 <li></li>
-                                <li><a href="#pacientes">PACIENTES</a></li>
+                                <li><a id="pacientes" href="@{Pacientes.listadoPacientes}">PACIENTES</a></li>
                                 <li><a href="#citas">CITAS</a></li>
-                                <li><a href="#doctores">DOCTORES</a></li>
+                                <li><a id="doctores" href="@{Doctores.mostrarCrearDoctor}">DOCTORES</a></li>
                                 <li><a href="#estadisticas">ESTADISTICAS</a></li>
                                 <li id = "notification-label" class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -58,7 +58,7 @@
                                     </ul>
                                 </li>
                                 <li id = "notification-label" class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="hola" class="dropdown-toggle" data-toggle="dropdown">
                                         <span class="icon-info-sign icon-white"></span>
                                     </a>
                                     <ul class="dropdown-menu" id="drop-notification">

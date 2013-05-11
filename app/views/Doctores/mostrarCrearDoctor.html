@@ -1,0 +1,58 @@
+#{extends 'maindash.html'/}
+#{set title: 'Crear Doctor' /}
+
+<h2>Crear Doctor</h2>
+
+#{ifErrors}
+    <h1>Error...</h1>
+#{/ifErrors}
+
+<article>
+    #{form @Doctores.crearDoctor()}
+        <p>
+            <label for="usuario">Ingrese el Usuario:</label>
+            <input type="text" name="usuario" value="${usuario}" />
+            <span class="error">#{error 'usuario' /}</span>
+        </p>
+        <p>
+            <label for="password">Ingrese la Contraseña:</label>
+            <input type="text" name="password" value="${password}" />
+            <span class="error">#{error 'password' /}</span>
+        </p>
+        <p>
+            <label for="nombre">Ingrese el Nombre:</label>
+            <input type="text" name="nombre" value="${nombre}" />
+            <span class="error">#{error 'nombre' /}</span>
+        </p>
+        <p>
+            <label for="apellido">Ingrese el Apellido:</label>
+            <input type="text" name="apellido" value="${apellido}" />
+            <span class="error">#{error 'apellido' /}</span>
+        </p>
+        <p>
+            <label for="fechaNac">Fecha de Nacimiento:</label>
+            <input type="text" name="fechaNac" value="${fechaNac}" />
+            <span class="error">#{error 'fechaNac' /}</span>
+        </p>
+        <p>
+            <label>Sexo:</label>
+            <select name="sexo">
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+            </select>
+        </p>
+        <p>
+            <label for="direccion">Direccìon:</label>
+            <input type="text" name="direccion" value="${direccion}" />
+            <span class="error">#{error 'direccion' /}</span>
+        </p>
+        <p>
+            <label for="telefono">Telefono:</label>
+            <input type="text" name="telefono" value="${telefono}" />
+            <span class="error">#{error 'telefono' /}</span>
+        </p>
+        <p>
+            <input type="submit" value="Crear Doctor" />
+        </p>
+    #{/form}
+</article>

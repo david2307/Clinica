@@ -10,6 +10,7 @@ import models.HistorialMedico;
 import models.Municipio;
 import models.Paciente;
 import models.Pregunta;
+import models.TipoUsuario;
 import models.Usuario;
 
 import play.data.validation.Required;
@@ -18,24 +19,19 @@ import play.mvc.Controller;
 public class Doctores extends Controller {
 	
 	   //GET 
-		public static void perfilDoctor(){
-			Usuario usuario = Usuario.find("byNickname", Security.connected()).first();
-			if(usuario!= null){
-				Doctor doctor = Doctor.find("byUsuario", usuario).first();
+		public static void perfilDoctor(long idDoctor){
+			Doctor doctor = Doctor.findById(idDoctor);
 				if(doctor!=null ){
 					render(doctor);
 				}else{
-					render("Doctores/show.html");
+					Security.onAuthenticated();
 				}
-			}else{
-				render("Doctores/show.html");
-			}
-			
+					
 		}
 	
 	
 	    //GET 
-		public void mostrarCrearDoctor(){
+		public static void mostrarCrearDoctor(){
 			render();
 		}
 	
@@ -43,48 +39,74 @@ public class Doctores extends Controller {
 	    //POST
 		public static void crearDoctor(	@Required(message="El nombre es requerido") String nombre,
 										@Required(message="El apellido es requerido") String apellido,
-										@Required(message="La fecha de nacimiento es requerida") Date fechanac,
+										@Required(message="La fecha de nacimiento es requerida") Date fechaNac,
 										@Required(message="El sexo es requerido") String sexo,
 										@Required(message="La direccion es requerido") String direccion,
 										@Required(message="El telefono es requerido") String telefono,
-										@Required(message="El usuario es requerido") Usuario usuario,
-										@Required(message="El municipio es requerido") Municipio municipio,
+										@Required(message="El usuario es requerido") String usuario,
+										@Required(message="La contraseña es requerida") String password,
+										Municipio municipio,
 										String dpi){
 			if (validation.hasErrors()){
-				render(nombre, apellido, fechanac, sexo, direccion, telefono, dpi,municipio);
+				render("Doctores/mostrarCrearDoctor.html",nombre, apellido, fechaNac, sexo, direccion, telefono,usuario,password, dpi,municipio);
 			}
-				Doctor doctor = new Doctor(nombre, apellido, fechanac, sexo, direccion, telefono, dpi,usuario, municipio );	
+				
+				TipoUsuario tipoUsuario = TipoUsuario.findById((long)2);
+			    Usuario usuarioNuevo = new Usuario(usuario,password,true,tipoUsuario).save();
+				Doctor doctor = new Doctor(nombre, apellido, fechaNac, sexo, direccion, telefono, dpi,usuarioNuevo, null );	
 				doctor.save();
 				flash.success("Doctor creado correctamente");
-				perfilDoctor();
+				perfilDoctor(doctor.id);
 		}
 		
+		
+		//GET 
+		public static void mostrarModificarDoctor(long idDoctor){
+			Doctor doctor = Doctor.findById(idDoctor);
+			render(doctor);
+		}
+		
+		
+		
 		//POST 
-		public static void modificaDoctor(@Required(message="El id es requerido") long idPaciente,
-										  @Required(message="El nombre es requerido") String nombre,
-										  @Required(message="El apellido es requerido") String apellido,
-										  @Required(message="La fecha de nacimiento es requerida") Date fechanac,
-										  @Required(message="El sexo es requerido") String sexo,
-										  @Required(message="La direccion es requerido") String direccion,
-										  @Required(message="El telefono es requerido") String telefono,
-										  @Required(message="El usuario es requerido") Usuario usuario,
-										  @Required(message="El municipio es requerido") Municipio municipio,
-										  String dpi){
-			if (validation.hasErrors()){
-				render(idPaciente, nombre, apellido, fechanac, sexo, direccion, telefono, dpi,municipio);
-			}else{
-				Doctor doctor = new Doctor(nombre, apellido, fechanac, sexo, direccion, telefono, dpi,usuario, municipio );
-				if(doctor.validateAndSave()){
-					flash.success("Doctor modificado correctamente");
-					perfilDoctor();
-				}else{
-					render("Doctores/show.html");
-				}
-				
-				
+		public static void modificarDoctor(@Required(message="El id es requerido") long idDoctor,
+												  @Required(message="El nombre es requerido") String nombre,
+												  @Required(message="El apellido es requerido") String apellido,
+												  @Required(message="La fecha de nacimiento es requerida") Date fechaNac,
+												  @Required(message="El sexo es requerido") String sexo,
+												  @Required(message="La direccion es requerido") String direccion,
+												  @Required(message="El telefono es requerido") String telefono,
+												  Usuario usuario,
+												  Municipio municipio,
+												  String dpi){
+					if (validation.hasErrors()){
+						Doctor doctor =Doctor.findById(idDoctor);
+						render("Doctores/mostrarModificarDoctor.html",doctor);
+					}else{
+						Doctor doctor = Doctor.findById(idDoctor);
+						doctor.nombre = nombre;
+						doctor.apellido = apellido;
+						doctor.fechaNac = fechaNac;
+						doctor.sexo = sexo;
+						doctor.direccion = direccion;
+						doctor.telefono = telefono;
+						if(doctor.validateAndSave()){
+							System.out.println("no ocurrio erro al guardar");
+							flash.success("Doctor modificado correctamente");
+							perfilDoctor(doctor.id);
+						}else{
+							Security.onAuthenticated();
+						}
+						
+						
+					}
+					
 			}
-			
-	}
+		
+		
+		
+		
+		
 		
 		
 		
@@ -98,7 +120,7 @@ public class Doctores extends Controller {
 		    	if(pacientes != null){
 		    		render(pacientes);
 		    	}else{
-		    		perfilDoctor();
+		    		//perfilDoctor();
 		    	}
 		    }else{
 		    	render("Doctores/show.html");

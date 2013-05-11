@@ -23,6 +23,9 @@ public class Paciente extends Model {
 	public String sexo;
 	
 	@Required
+	public String direccion;
+	
+	@Required
 	public int telefono;
 	
 	@Required
@@ -44,6 +47,8 @@ public class Paciente extends Model {
 	
 	public String observaciones;
 	
+	public Blob foto;
+	
 	@ManyToOne
 	public Usuario usuario;
 	
@@ -51,11 +56,12 @@ public class Paciente extends Model {
 	public Municipio municipio;
 	
 	
-	public Paciente(String nombre, String apellido, Date fechaNac, String sexo, int telefono, String dpi, String email, String nombreEmergencia, int telefonoEmergencia, Date ultimaVisita, String referido, String observaciones, Usuario usuario, Municipio municipio ){
+	public Paciente(String nombre, String apellido, Date fechaNac, String sexo, String direccion, int telefono, String dpi, String email, String nombreEmergencia, int telefonoEmergencia, Date ultimaVisita, String referido, String observaciones, Blob foto, Usuario usuario, Municipio municipio ){
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.fechaNac = fechaNac;
 		this.sexo = sexo;
+		this.direccion = direccion;
 		this.telefono = telefono;
 	    this.dpi = dpi;
 	    this.email = email;
@@ -64,6 +70,7 @@ public class Paciente extends Model {
 	    this.ultimaVisita = ultimaVisita;
 	    this.referido = referido;
 	    this.observaciones = observaciones;
+	    this.foto = foto;
 	    this.usuario = usuario;
 	    this.municipio = municipio;
 	}

@@ -18,5 +18,16 @@ GET     /favicon.ico                            404
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
+# Rutas de Pacientes
+
+GET     /pacientes/crearpaciente                Pacientes.mostrarCrearPaciente
+POST    /pacientes/crearpaciente                Pacientes.crearPaciente
+
+# Rutas de Doctores
+
+GET		/doctores/creardoctor					Doctores.mostrarCrearDoctor
+POST	/doctores/creardoctor					Doctores.crearDoctor		
+
+
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
