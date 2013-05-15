@@ -16,7 +16,7 @@ import play.mvc.Controller;
 public class Usuarios extends Controller {
 	
 	//GET
-	public static void mostrarCrearUsuarios(@Required(message="El token es requerido") String token){
+	public static void mostrarCrearUsuario(@Required(message="El token es requerido") String token){
 		if(validation.hasErrors()){
 			render();
 		}
@@ -29,19 +29,6 @@ public class Usuarios extends Controller {
 			Security.onAuthenticated();
 		}
 	}
-	
-	//GET
-		public static void mostrarCrearUsuario(@Required(message="El id es requerido") long id){
-			if(validation.hasErrors()){
-				render();
-			}
-			Paciente paciente = Paciente.findById(id);
-			if(paciente != null){
-				render(paciente);
-			}else{
-				Security.onAuthenticated();
-			}
-		}
 	
 	//POST
 	public static void crearUsuario(@Required(message="El nickName es requerido")String nickName, 

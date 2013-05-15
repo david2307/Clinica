@@ -20,30 +20,37 @@ public class Cita extends Model {
 	@Required
 	public Date	fechaProgramada;
 	
-	@Required
 	public Date fechaRelizacion;
 	
 	@Required
 	public int estado;
 	
+	@Required
 	@ManyToOne
 	public Paciente paciente;
 	
+	@Required
 	@ManyToOne
 	public Doctor doctor;
 	
+	@OneToMany(mappedBy="cita", cascade=CascadeType.ALL)
+	public List<CitaProcedimiento> citaProcedimiento;
+	
 	public Cita(Date fechaPeticion, String descripcion, Date fechaProgramada, Date fechaRealizacion, int estado, Paciente paciente, Doctor doctor){
+		this.citaProcedimiento = new ArrayList<CitaProcedimiento>();
 		this.fechaPeticion = fechaPeticion;
 		this.descripcion = descripcion;
 		this.fechaProgramada = fechaProgramada;
 		this.fechaRelizacion = fechaRealizacion;
 		this.estado = estado;
-		this.paciente =paciente;
+		this.paciente = paciente;
 		this.doctor = doctor;
-		
 	}
 	
-	
-	
-
+	public Cita agregarCitaProcedimiento(Procedimiento procedimiento){
+		CitaProcedimiento citaProcedimiento = new CitaProcedimiento(procedimiento, this);
+		this.citaProcedimiento.add(citaProcedimiento);
+		this.save();
+		return this;
+	}
 }

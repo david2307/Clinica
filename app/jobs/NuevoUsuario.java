@@ -23,7 +23,7 @@ public class NuevoUsuario extends Job{
 		System.out.println(token);
 		String url = "http://localhost:9000/Usuarios/mostrarCrearUsuario?token=" + token;
 		SimpleEmail email = new SimpleEmail();
-		email.setFrom("mariog.david@gmail.com");
+		email.setFrom("codea.latinoamerica@gmail.com");
 		email.addTo(emailCliente);
 		email.setSubject("Activacion de Usuario");
 		email.setMsg("URL: " + url);

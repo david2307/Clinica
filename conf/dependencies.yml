@@ -4,3 +4,11 @@ require:
     - play
     - play -> secure
     - play -> crud
+    - provided -> json 1.1.1
+
+repositories:
+  - provided:
+      type:       local
+      artifact:   ${application.path}/jar/[module]-[revision].jar
+      contains:
+        - provided -> *
