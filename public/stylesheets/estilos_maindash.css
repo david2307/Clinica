@@ -1,0 +1,23 @@
+#sidebar{
+	color: white;
+	background: rgba(0,0,0,0.1);
+	border-radius: 10px;
+	height: 600px;
+	margin-top: -18px;
+	margin-left: -30px;
+	overflow: hidden;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	text-align: left;
+	width: 10px;
+	-webkit-transition: width .5s;
+
+
+}
+
+#sidebar:hover{
+	background: rgba(0,0,0,0.4);
+	width: 130px;
+}

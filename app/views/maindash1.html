@@ -6,9 +6,10 @@
         <meta charset="${_response_encoding}">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        <link rel="stylesheet" media="screen" type="text/css" href="@{'/public/stylesheets/estilos.css'}">
+        <link rel="stylesheet" media="screen" type="text/css" href="@{'/public/stylesheets/estilos2.css'}">
         <link rel="stylesheet" media="screen" type="text/css" href="@{'/public/stylesheets/bootstrap.css'}">
         <link rel="stylesheet" media="screen" type="text/css" href="@{'/public/stylesheets/bootstrap-responsive.css'}">
+
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
         <script src="@{'/public/javascripts/jquery-1.7.1.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
@@ -16,6 +17,8 @@
         <script src="@{'/public/javascripts/bootstrap-tooltip.js'}" type="text/javascript"></script>
         <script src="@{'/public/javascripts/bootstrap-twipsy.js'}" type="text/javascript"></script>
         <script src="@{'/public/javascripts/bootstrap-popover.js'}" type="text/javascript"></script>
+        <script src="@{'/public/javascripts/bootstrap-collapse.js'}" type="text/javascript"></script>
+        
         #{get 'moreScripts' /}
     </head>
     
@@ -41,13 +44,13 @@
                         <div class="nav-collapse collapse">
                             <ul class="nav">
                                 <li></li>
-                                <li><a href="#pacientes">PACIENTES</a></li>
+                                <li><a id="pacientes" href="@{Pacientes.listadoPacientes}">PACIENTES</a></li>
                                 <li><a href="#citas">CITAS</a></li>
-                                <li><a href="#doctores">DOCTORES</a></li>
+                                <li><a id="doctores" href="@{Doctores.mostrarCrearDoctor}">DOCTORES</a></li>
                                 <li><a href="#estadisticas">ESTADISTICAS</a></li>
                                 <li id = "notification-label" class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <span class="badge badge-warning" id="notification-label">3</span>
+                                        <span class="badge badge-warning" id="notification-label">4</span>
                                     </a>
                                     <ul class="dropdown-menu" id="drop-notification">
                                         <li>Uno</li>
@@ -57,7 +60,7 @@
                                     </ul>
                                 </li>
                                 <li id = "notification-label" class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="hola" class="dropdown-toggle" data-toggle="dropdown">
                                         <span class="icon-info-sign icon-white"></span>
                                     </a>
                                     <ul class="dropdown-menu" id="drop-notification">
@@ -80,12 +83,48 @@
             </div>
             <!-- FINALIZA EL MENU -->
             <section id="layout">
+                <section id="menu-slider-section-1">
+                    <article id="menu-slider">
+                    <ul>
+                        <li>Pacientes</li>
+                        <li> <button class="btn btn-primary">Nuevo</button></li>
+                        
+                        
+                           
+                    </ul>
+                    </article >
+                </section>
                 <section id="content-layout">
                     #{doLayout /}
+                    
+
+<!-- Button to trigger modal -->
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+</div>
+
                 </section>
-            </section>  
+            </section> 
+            
         </section>
+
+           
     </body>
+
+
 
     <footer>
         <H6>Todos los derechos reservados Codea.la</H6>
