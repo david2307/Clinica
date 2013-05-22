@@ -72,15 +72,63 @@
     <div class="span2" id="sidebar">
       <!--Sidebar content-->
         <!-- Button to trigger modal -->
-        <a href="#myModal" role="button" class="btn btn-warning" data-toggle="modal">Nuevo</a>
-    </body>
+        
+    
     </div>
-    <div class="span10">
+    <div id="content-layout"class="span10">
       <!--Body content-->
       #{doLayout /}
     </div>
   </div>
 </div>
+<!-- PESTANA FACEBOOK -->
+<div id="facebook">
+  <div id="flange">
+    <img src="@{'/public/images/fb_tab.png'}">
+  </div>
+     <div id="content-facebook">
+    
+     </div>
+  <div id="border-facebook"></div>
+  
+</div>
+<!-- PESTANA DE GOOGLE -->
+<div id="google">
+  <div id="google-flange">
+    <img src="@{'/public/images/goo_tab.png'}">
+  </div>
+     <div id="google-content">
+    
+     </div>
+  <div id="google-border"></div>
+  
+</div>
+<!-- PESTANA DE TWITTER -->
+<div id="twitter">
+  <div id="twitter-flange">
+    <img src="@{'/public/images/tw_tab.png'}">
+  </div>
+  <div id="twitter-border">
+     <div id="twitter-content">
+    
+     </div>
+  </div>
+  
+</div>
+<!-- PESTANA DE SLIDEMENU -->
+<div id="slidemenu">
+  <div id="slidemenu-flange">
+    <img src="@{'/public/images/menu.png'}">
+  </div>
+  <div id="slidemenu-border">
+     <div id="slidemenu-content">
+        <a href="#myModal" role="button" class="btn btn-warning" data-toggle="modal">Nuevo</a>
+     </div>
+  </div>
+  
+</div>
+
+</body>
 
 <!-- Modal -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
