@@ -1,6 +1,100 @@
 #{extends 'maindash.html' /} 
 #{set title:'Dashboard Doctores' /}
 
-<article>
-    <img id ="layout-paciente"src="@{'/public/images/layout-paciente.png'}"/>
-</article> 
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2" id="switcher">
+      <article id="perfil-link">
+      	<a href="#"><img src="@{'/public/images/iconmonstr-user-6-icon.png'}" class="img-rounded" ></a>
+      </article>
+      <article id="estadistica-link">
+      	<a href="#"><img src="@{'/public/images/iconmonstr-bar-chart-4-icon.png'}" class="img-rounded"></a>
+      </article>
+      <article id="historial-link">
+      	<a href="#"><img src="@{'/public/images/iconmonstr-calendar-8-icon.png'}" class="img-rounded"></a>
+      </article>
+      <article id="dentadura-link">
+      	<a href="#"><img src="@{'/public/images/iconmonstr-user-6-icon-dent.png'}" class="img-rounded"></a>
+      </article>
+      
+    
+    </div>
+    <div id="switcher-content"class="span10">
+      <!--Body content-->
+     <section id="switcher-content-layout">
+     	<article id="perfil">
+     		<h2>Aca se vera el contenido del perfil</b></h2>
+     	</article>
+     	<article id="estadistica">
+     		<h2>Aca se vera el contenido del ESTADISTICAS</b></h2>
+     	</article>
+     	<article id="historial">
+     		<h2>Aca se vera el contenido del HISTORIAL</b></h2>
+     	</article>
+     	<article id="dentadura">
+     		<h2>Aca se vera el contenido DE LOS ORGANOS</b></h2>
+     	</article>
+     	
+     </section>
+    </div>
+  </div>
+</div>
+<script>
+$(document).ready(function(){
+	$("#estadistica").hide();
+	$("#historial").hide();
+	$("#dentadura").hide();
+});
+$("#perfil-link").click(function() {
+  function complete() {
+    //$("<div/>").text(this.id).appendTo("#log");
+    $("#switcher-content").fadeIn(300, "linear");
+ 	$("#perfil").show();   
+  }
+    $("#estadistica").hide();
+	$("#historial").hide();
+	$("#dentadura").hide();
+ 
+  $("#switcher-content").fadeOut(300, "linear", complete);
+  
+});
+$("#estadistica-link").click(function() {
+  function complete() {
+    //$("<div/>").text(this.id).appendTo("#log");
+    $("#switcher-content").fadeIn(300, "linear");
+ 	$("#estadistica").show();   
+  }
+  	$("#perfil").hide();
+	$("#historial").hide();
+	$("#dentadura").hide();
+ 
+  $("#switcher-content").fadeOut(300, "linear", complete);
+  
+});
+$("#historial-link").click(function() {
+  function complete() {
+    //$("<div/>").text(this.id).appendTo("#log");
+    $("#switcher-content").fadeIn(300, "linear");
+ 	$("#historial").show();   
+  }
+  	$("#perfil").hide();
+	$("#estadistica").hide();
+	$("#dentadura").hide();
+ 
+  $("#switcher-content").fadeOut(300, "linear", complete);
+  
+});
+$("#dentadura-link").click(function() {
+  function complete() {
+    //$("<div/>").text(this.id).appendTo("#log");
+    $("#switcher-content").fadeIn(300, "linear");
+ 	$("#dentadura").show();   
+  }
+    $("#perfil").hide();
+	$("#estadistica").hide();
+	$("#historial").hide();
+ 
+  $("#switcher-content").fadeOut(300, "linear", complete);
+  
+});
+</script>

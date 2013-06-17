@@ -9,6 +9,7 @@
 	<script src="@{'/public/javascripts/bootstrap-collapse.js'}"></script>
   <script src="@{'/public/javascripts/spinPulse.js'}"></script>
   <script src="@{'/public/javascripts/bootstrap-datepicker.js'}"></script>
+  <script src="@{'/public/javascripts/animaciones.js'}"></script>
 
 	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/bootstrap.css'}">
 	<link href="@{'/public/stylesheets/bootstrap-responsive.css'}" rel="stylesheet">
@@ -158,16 +159,13 @@
 <article class="form-horizontal">
     #{form @Pacientes.crearPaciente()}
         <p>
-            <label for="nombre" class="control-label" for="nombre">Ingrese el Nombre:</label>
+            <label for="nombre">Ingrese el Nombre:</label>
             <input type="text" id="nombre" name="nombre" placeholder="Nombre" value="${nombre}" />
             <span class="error">#{error 'nombre' /}</span>
         </p> 
-         <div class="input-append date" id="dpYears" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-        <input size="60" type="text" style="z-index: 99999" value="12-02-2012" readonly="">
-        <span class="add-on"><i class="icon-calendar"></i></span>
-        </div>
+      
         <p>
-            <label for="apellido" class="control-label">Ingrese el Apellido:</label>
+            <label for="apellido" >Ingrese el Apellido:</label>
             <input type="text" id="apellido" name="apellido" value="${apellido}" />
             <span class="error">#{error 'apellido' /}</span>
         </p>
@@ -232,8 +230,8 @@
 </article>
   </div>
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+    <button class="btn btn-primary">Guardar</button>
 
         
   </div>

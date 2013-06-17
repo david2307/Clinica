@@ -1,3 +1,4 @@
+
 #content-layout{
 	background-color: #D7DEF0;
 	border-radius: 10px;
@@ -7,6 +8,38 @@
 	background-color: #AAFFAA;
 	border-radius: 10px;
 	min-height: 300px;
+}
+#switcher{
+	background-color: rgba(0,0,0,0.1);
+	width: 100px;
+}
+#switcher article{
+	background-color: rgba(0,0,0,0.1);
+	border-radius: 10px;
+	height: 100px;
+	width: 100px;
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
+	-webkit-transition: background-color .5s;
+
+}
+#switcher article:hover{
+	background-color: rgba(0,0,0,0.3);
+}
+#switcher article img{
+	-webkit-transition:.2s;
+	-moz-transition:.2s;
+}
+#switcher article:hover img{
+	-webkit-transform:scale(1.1);
+	-moz-trasnform:scale(1.1);
+}
+#switcher article button{
+	background-color: rgba(0,0,0,0);
+}
+#switcher-content{
+	background-color: rgba(0,0,0,0.1);
+
 }
 /*PESTANA DE FACEBOOK*/
 #border-facebook{
