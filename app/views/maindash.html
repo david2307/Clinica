@@ -6,14 +6,22 @@
 	<title>Prueba</title>
 	<script src="@{'/public/javascripts/jquery-1.7.1.min.js'}"></script>
 	<script src="@{'/public/javascripts/bootstrap.js'}"></script>
-	<script src="@/public/javascripts/bootstrap-collapse.js'}"></script>
+	<script src="@{'/public/javascripts/bootstrap-collapse.js'}"></script>
+  <script src="@{'/public/javascripts/spinPulse.js'}"></script>
+  <script src="@{'/public/javascripts/bootstrap-datepicker.js'}"></script>
 
 	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/bootstrap.css'}">
 	<link href="@{'/public/stylesheets/bootstrap-responsive.css'}" rel="stylesheet">
    <link rel="stylesheet" media="screen" type="text/css" href="@{'/public/stylesheets/estilos_maindash.css'}">
+   <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/spinPulse.css'}">
+   <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/datepicker.css'}">
 	
 </head>
 <body>
+
+  <script type="text/javascript">
+ LoadingIndicator.start('Cargando');
+  </script>
 
 <div class="bs-docs-example">
             <div class="navbar" style="position: static;">
@@ -24,10 +32,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </a>
-                  <a class="brand" href="#">Génesis Dental</a>
+                  <a class="brand" href="@{Dashboard.doctores}">Génesis Dental</a>
                   <div class="nav-collapse collapse navbar-inverse-collapse">
                     <ul class="nav">
-                      <li class="active"><a href="#">Pacientes</a></li>
+                      <li class="active"><a href="@{Pacientes.crearPaciente}">Pacientes</a></li>
                       <li><a href="#">Citas</a></li>
                       <li><a href="#">Doctores</a></li>
                       <li><a href="#">Estadisticas</a></li>
@@ -72,7 +80,6 @@
     <div class="span2" id="sidebar">
       <!--Sidebar content-->
         <!-- Button to trigger modal -->
-        
     
     </div>
     <div id="content-layout"class="span10">
@@ -81,6 +88,8 @@
     </div>
   </div>
 </div>
+
+
 <!-- PESTANA FACEBOOK -->
 <div id="facebook">
   <div id="flange">
@@ -128,21 +137,111 @@
   
 </div>
 
+  <script type="text/javascript">
+ LoadingIndicator.status('Espere');
+ LoadingIndicator.done();
+  </script>
+
 </body>
 
 <!-- Modal -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
+    <h3 id="myModalLabel">Crear Paciente</h3>
   </div>
   <div class="modal-body">
-    <p>One fine body…</p>
+    #{ifErrors}
+    <h1>Oops...</h1>
+#{/ifErrors}
+
+<article class="form-horizontal">
+    #{form @Pacientes.crearPaciente()}
+        <p>
+            <label for="nombre" class="control-label" for="nombre">Ingrese el Nombre:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre" value="${nombre}" />
+            <span class="error">#{error 'nombre' /}</span>
+        </p> 
+         <div class="input-append date" id="dpYears" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+        <input size="60" type="text" style="z-index: 99999" value="12-02-2012" readonly="">
+        <span class="add-on"><i class="icon-calendar"></i></span>
+        </div>
+        <p>
+            <label for="apellido" class="control-label">Ingrese el Apellido:</label>
+            <input type="text" id="apellido" name="apellido" value="${apellido}" />
+            <span class="error">#{error 'apellido' /}</span>
+        </p>
+        <p>
+            <label for="fechaNac">Fecha de Nacimiento:</label>
+            <input type="text" name="fechaNac" value="${fechaNac}" />
+            <span class="error">#{error 'fechaNac' /}</span>
+        </p>
+        <p>
+            <label>Sexo:</label>
+            <select name="sexo">
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+            </select>
+        </p>
+        <p>
+            <label>Direccion:</label>
+            <input type="text" name="direccion" value="${direccion}" />
+            <span class="error">#{error 'direccion' /}</span>
+        </p>
+        <p>
+            <label for="telefono">Telefono:</label>
+            <input type="text" name="telefono" value="${telefono}" />
+            <span class="error">#{error 'telefono' /}</span>
+        </p>
+        <p>
+            <label for="dpi">DPI:</label>
+            <input type="text" name="dpi" value="${dpi}" />
+            <span class="error">#{error 'dpi' /}</span>
+        </p>
+        <p>
+            <label for="email">Email:</label>
+            <input type="text" name="email" value="${email}" />
+            <span class="error">#{error 'email' /}</span>
+        </p>
+        <p>
+            <label for="nombreEmergencia">Nombre de Contacto de Emergencia</label>
+            <input type="text" name="nombreEmergencia" value="${nombreEmergencia}" />
+            <span class="error">#{error 'nombreEmergencia' /}</span>
+        </p>
+        <p>
+            <label for="telefonoEmergencia">Telefono de Contacto de Emergencia</label>
+            <input type="text" name="telefonoEmergencia" value="${telefonoEmergencia}" />
+            <span class="error">#{error 'telefonoEmergencia' /}</span>
+        </p>
+        <p>
+            <label for="ultimaVisita">Ultima Visita al Dentista:</label>
+            <input type="text" name="ultimaVisita" value="${ultimaVisita}" />
+        </p>
+        <p>
+            <label for="referido">Referido por:</label>
+            <input type="text" name="referido" value="${referido}" />
+        </p>
+        <p>
+            <label for="observaciones">Observaciones:</label>
+            <textarea name="observaciones">${observaciones}</textarea>
+        </p>
+        <p>
+            <input type="submit" value="Crear Paciente" class="btn btn-primary" />
+        </p>
+    #{/form}
+</article>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     <button class="btn btn-primary">Save changes</button>
+
+        
   </div>
 </div>
 
 </html>
+<script>
+$(function(){
+  $('#dpYears').datepicker();
+});
+</script>
